@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KINO_FAP — Вход и регистрация</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#111111">
+<link rel="stylesheet" href="/assets/css/app.css">
+<script defer src="/assets/js/app.js"></script>
+
+<!-- Firebase CDN -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script defer src="/assets/js/firebase.js"></script>
+
+</head>
+<body>
+
+    <header class="header">
+      <div class="container nav">
+        <div class="logo">KINO_FAP <span class="pill">NEON</span></div>
+        <a href="/index.html" >Главная</a>
+        <a href="/catalog.html" >Каталог</a>
+        <a href="/favorites.html" >Избранное</a>
+        <div class="spacer"></div>
+        <a id="authLink" href="/auth.html">Войти</a>
+        <a id="profileLink" class="hidden" href="/profile.html">Профиль</a>
+        <button id="installBtn" class="btn">Установить</button>
+      </div>
+    </header>
+    
+<main class="container">
+<section class="hero">
+  <div class="panel" style="max-width:520px">
+    <h1 class="section-title" style="font-size:24px">Войти</h1>
+    <input id="loginEmail" class="input" placeholder="Email">
+    <input id="loginPass" class="input" placeholder="Пароль" type="password" style="margin-top:8px">
+    <button id="loginBtn" class="btn" style="margin-top:10px">Войти</button>
+    <p style="color:var(--muted);margin-top:8px">Нет аккаунта? Перейдите ниже.</p>
+  </div>
+  <div class="panel" style="max-width:520px">
+    <h2 class="section-title" style="font-size:20px">Регистрация</h2>
+    <input id="regName" class="input" placeholder="Имя">
+    <input id="regEmail" class="input" placeholder="Email" style="margin-top:8px">
+    <input id="regPass" class="input" placeholder="Пароль" type="password" style="margin-top:8px">
+    <button id="regBtn" class="btn" style="margin-top:10px">Зарегистрироваться</button>
+  </div>
+</section>
+<script defer src="/assets/js/auth.js"></script>
+</main>
+
+    <footer class="footer">
+      Сделано с ❤️ — KINO_FAP. Работает офлайн как PWA.
+    </footer>
+    
+<script>window.__PAGE__=""</script>
+<script>
+if ('serviceWorker' in navigator){ navigator.serviceWorker.register('/service-worker.js'); }
+</script>
+</body>
+</html>

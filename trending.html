@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KINO_FAP — Тренды</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#111111">
+<link rel="stylesheet" href="/assets/css/app.css">
+<script defer src="/assets/js/app.js"></script>
+<!-- Firebase CDN -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script defer src="/assets/js/firebase.js"></script>
+</head>
+<body>
+<header class="header">
+  <div class="container nav">
+    <div class="logo">KINO_FAP <span class="pill">NEON</span></div>
+    <a href="/index.html">Главная</a>
+    <a href="/catalog.html">Каталог</a>
+    <a href="/new.html">Новинки</a>
+    <a href="/trending.html">Тренды</a>
+    <a href="/top.html">Топ-250</a>
+    <a href="/favorites.html">Избранное</a>
+    <div class="spacer"></div>
+    <a id="authLink" href="/auth.html">Войти</a>
+    <a id="profileLink" class="hidden" href="/profile.html">Профиль</a>
+    <button id="installBtn" class="btn">Установить</button>
+  </div>
+</header>
+<main class="container">
+  <section>
+    <h1 class="section-title" style="font-size:24px">Сейчас в тренде</h1>
+    <div id="trendingGrid" class="grid"></div>
+  </section>
+</main>
+<footer class="footer">
+  Сделано с ❤️ — KINO_FAP. Работает офлайн как PWA.
+</footer>
+<script>window.__PAGE__="trending"</script>
+<script>
+async function loadMoviesCustom(url){
+  const response = await fetch(url, {
+    headers: {
+      'X-API-KEY':'960dc4e3-9eae-4072-8f0c-98a5ed6c0d2a',
+      'Content-Type':'application/json'
+    }
+  });
+  const data = await response.json();
+  return data.docs.map(m=>({id:m.id,title:m.name||m.alternativeName,year:m.year,poster:m.poster?.url||'',rating:m.rating?.kp||0,overview:m.description||'',genre:m.genres?.[0]?.name||'другое',watchUrl:`https://www.kinopoisk.ru/film/${m.id}/`}));
+}
+async function initPage(){
+  const grid=document.getElementById('trendingGrid');
+  let url=new URL("https://api.kinopoisk.dev/v1.4/movie");
+  url.searchParams.set('sortField','votes.kp'); url.searchParams.set('sortType','-1');
+  const movies=await loadMoviesCustom(url);
+  grid.innerHTML=movies.map(cardHtml).join('');
+}
+initPage();
+</script>
+<script>
+if ('serviceWorker' in navigator){ navigator.serviceWorker.register('/service-worker.js'); }
+</script>
+</body>
+</html>

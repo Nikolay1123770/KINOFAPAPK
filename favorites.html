@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KINO_FAP — Избранное</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#111111">
+<link rel="stylesheet" href="/assets/css/app.css">
+<script defer src="/assets/js/app.js"></script>
+
+<!-- Firebase CDN -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script defer src="/assets/js/firebase.js"></script>
+
+</head>
+<body>
+
+    <header class="header">
+      <div class="container nav">
+        <div class="logo">KINO_FAP <span class="pill">NEON</span></div>
+        <a href="/index.html" >Главная</a>
+        <a href="/catalog.html" >Каталог</a>
+        <a href="/favorites.html" style="background:rgba(255,255,255,.06)">Избранное</a>
+        <div class="spacer"></div>
+        <a id="authLink" href="/auth.html">Войти</a>
+        <a id="profileLink" class="hidden" href="/profile.html">Профиль</a>
+        <button id="installBtn" class="btn">Установить</button>
+      </div>
+    </header>
+    
+<main class="container">
+<section>
+  <h1 class="section-title" style="font-size:24px">Мои избранные</h1>
+  <div id="favGrid" class="grid"></div>
+</section>
+</main>
+
+    <footer class="footer">
+      Сделано с ❤️ — KINO_FAP. Работает офлайн как PWA.
+    </footer>
+    
+<script>window.__PAGE__="fav"</script>
+<script>
+if ('serviceWorker' in navigator){ navigator.serviceWorker.register('/service-worker.js'); }
+</script>
+</body>
+</html>
